@@ -7,5 +7,6 @@ public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("HELLO World!");
         System.out.println("Minu nimi on Priit!");
+        System.out.println("Siia tuleb minu projekt");
     }
 }
