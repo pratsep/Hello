@@ -39,6 +39,11 @@ public class Puzzle extends Application {
             }
         }
         if (list.equals(kontroll) && asend == 0){
+            for (int i = 0; i < juppe; i++) {
+                if (ruudustik.getChildren().get(i).getOpacity() != 1){
+                    ruudustik.getChildren().get(i).setOpacity(1);
+                }
+            }
             Stage voitnud = new Stage();
             VBox ala = new VBox();
             Scene lopuStseen = new Scene(ala, 50, 100);
@@ -107,15 +112,20 @@ public class Puzzle extends Application {
                         }
                     }
                     else if ( event1.getButton().equals(MouseButton.SECONDARY)){
-                        //ID1 = pilt.getId();
-                        pilt.setRotate(keeratud + 90);
-                        keeratud = pilt.getRotate();
-                        if(keeratud == 360){
-                            keeratud = 0;
-                            pilt.setRotate(keeratud);
+                        if(!(event1.getTarget().equals(pilt))){
+                            pilt.setOpacity(1);
+                            klikk1();
                         }
-                        System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
-                        kontrollimine();
+                        else{
+                            pilt.setRotate(keeratud + 90);
+                            keeratud = pilt.getRotate();
+                            if(keeratud == 360){
+                                keeratud = 0;
+                                pilt.setRotate(keeratud);
+                            }
+                            System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
+                            kontrollimine();
+                        }
                     }
                 });
             }
