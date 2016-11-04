@@ -142,9 +142,11 @@ public class Puzzle extends Application {
             random.add(i);
         }
         ArrayList<Integer> sassis = new ArrayList<>();
-        for (int i = 0; i < random.size(); i++) {
+        while (random.size() != 0) {
+            int rng1 = (int) (Math.random()*random.size());
             int rng =(int) (Math.random()*sassis.size());
-            sassis.add(rng, random.get(i));
+            sassis.add(rng, random.get(rng1));
+            random.remove(rng1);
         }
         int z = 0;
         for (int j = 0; j < Math.sqrt(juppe); j++) {
