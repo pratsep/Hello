@@ -16,10 +16,10 @@ import java.util.Date;
 
 public class Puzzle extends Application {
     long startTime;
-    // duration;
+    double keeratud;
     GridPane ruudustik = new GridPane();
-    String ID1;
-    String ID2;
+    //String ID1;
+    //String ID2;
     int lvl1Pildid = new File("src/images").listFiles().length;
     int juppe = 9;
     ArrayList<ImageView> list = new ArrayList();
@@ -57,13 +57,13 @@ public class Puzzle extends Application {
     private void klikk1() {
         ruudustik.setOnMouseClicked(event -> {
             ImageView pilt = (ImageView)(event.getTarget());
-            double keeratud = pilt.getRotate();
+            keeratud = pilt.getRotate();
             if(keeratud == 360){
                 keeratud = 0;
             }
 
             if ( event.getButton().equals(MouseButton.SECONDARY)){
-                ID1 = pilt.getId();
+                //ID1 = pilt.getId();
                 pilt.setRotate(keeratud + 90);
                 keeratud = pilt.getRotate();
                 if(keeratud == 360){
@@ -74,7 +74,7 @@ public class Puzzle extends Application {
                 kontrollimine();
             }
             else if(event.getButton().equals(MouseButton.PRIMARY)){
-                ID1 = pilt.getId();
+                //ID1 = pilt.getId();
                 int X1 = ruudustik.getColumnIndex(pilt);
                 int Y1 = ruudustik.getRowIndex(pilt);
                 System.out.println("Pildi asukoht on(x/y): " + X1 + "/" + Y1);
@@ -83,7 +83,7 @@ public class Puzzle extends Application {
                 ruudustik.setOnMouseClicked(event1 -> {
                     if(event1.getButton().equals(MouseButton.PRIMARY)){
                         ImageView pilt2 = (ImageView)(event1.getTarget());
-                        ID2 = pilt2.getId();
+                        //ID2 = pilt2.getId();
                         int X2 = ruudustik.getColumnIndex(pilt2);
                         int Y2 = ruudustik.getRowIndex(pilt2);
                         if(pilt2.getOpacity() != 1){
@@ -91,7 +91,7 @@ public class Puzzle extends Application {
                             klikk1();
                         }
                         else{
-                            System.out.println("Teise pildi ID on: " + ID2);
+                            //System.out.println("Teise pildi ID on: " + ID2);
                             System.out.println("Teise pildi asukoht on(x/y): " + X2 + "/" + Y2);
                             int asukoht1 = kontroll.indexOf(pilt);
                             int asukoht2 = kontroll.indexOf(pilt2);
@@ -105,6 +105,17 @@ public class Puzzle extends Application {
                             kontrollimine();
                             klikk1();
                         }
+                    }
+                    else if ( event1.getButton().equals(MouseButton.SECONDARY)){
+                        //ID1 = pilt.getId();
+                        pilt.setRotate(keeratud + 90);
+                        keeratud = pilt.getRotate();
+                        if(keeratud == 360){
+                            keeratud = 0;
+                            pilt.setRotate(keeratud);
+                        }
+                        System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
+                        kontrollimine();
                     }
                 });
             }
