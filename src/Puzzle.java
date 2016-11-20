@@ -30,7 +30,6 @@ public class Puzzle extends Application {
         klikk1();
         kontrollimine();
     }
-
     private void kontrollimine() {
         int asend = 0;
         for (int i = 0; i < juppe; i++) {
@@ -52,13 +51,11 @@ public class Puzzle extends Application {
             voitnud.setTitle("Mäng läbi");
             //Aja võtmine
             String duration = new SimpleDateFormat("mm:ss").format(new Date(System.currentTimeMillis() - startTime));
-
             Label lopp = new Label("Puzzle on koos!");
             Label lopuaeg = new Label(duration);
             ala.getChildren().addAll(lopp, lopuaeg);
         }
     }
-
     private void klikk1() {
         ruudustik.setOnMouseClicked(event -> {
             ImageView pilt = (ImageView)(event.getTarget());
@@ -75,15 +72,15 @@ public class Puzzle extends Application {
                     keeratud = 0;
                     pilt.setRotate(keeratud);
                 }
-                System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
+                //System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
                 kontrollimine();
             }
             else if(event.getButton().equals(MouseButton.PRIMARY)){
                 //ID1 = pilt.getId();
                 int X1 = ruudustik.getColumnIndex(pilt);
                 int Y1 = ruudustik.getRowIndex(pilt);
-                System.out.println("Pildi asukoht on(x/y): " + X1 + "/" + Y1);
-                System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
+                //System.out.println("Pildi asukoht on(x/y): " + X1 + "/" + Y1);
+                //System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
                 pilt.setOpacity(0.5);
                 ruudustik.setOnMouseClicked(event1 -> {
                     if(event1.getButton().equals(MouseButton.PRIMARY)){
@@ -97,7 +94,7 @@ public class Puzzle extends Application {
                         }
                         else{
                             //System.out.println("Teise pildi ID on: " + ID2);
-                            System.out.println("Teise pildi asukoht on(x/y): " + X2 + "/" + Y2);
+                            //System.out.println("Teise pildi asukoht on(x/y): " + X2 + "/" + Y2);
                             int asukoht1 = kontroll.indexOf(pilt);
                             int asukoht2 = kontroll.indexOf(pilt2);
                             kontroll.set(asukoht2, pilt);
@@ -123,7 +120,7 @@ public class Puzzle extends Application {
                                 keeratud = 0;
                                 pilt.setRotate(keeratud);
                             }
-                            System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
+                            //System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
                             kontrollimine();
                         }
                     }
@@ -156,7 +153,6 @@ public class Puzzle extends Application {
                 IDlugeja = IDlugeja + 1;
             }
         }
-
         //Piltide lisamine GridPane'le
         ArrayList<Integer> random = new ArrayList<>();
         for (int i = 0; i < juppe; i++) {
@@ -181,8 +177,4 @@ public class Puzzle extends Application {
             }
         }
     }
-
-
-
-
 }
