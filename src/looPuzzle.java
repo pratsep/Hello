@@ -3,9 +3,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -15,20 +13,26 @@ public class looPuzzle {
     public  static double keeratud;
     public static GridPane ruudustik = new GridPane();
     public static long startTime;
-    int lvl1Pildid = new File("src/images").listFiles().length;
+
+    int pikkusPildid = new File("src/images").listFiles().length;
+    File kaustPildid=new File("src/images");
+    File[] listPildid= kaustPildid.listFiles();
+    int randomNr = (int)(Math.random()*pikkusPildid);
+    String nimiPilt = listPildid[randomNr].getName();
+
+
     public static ArrayList<ImageView> list = new ArrayList();
     public static ArrayList<ImageView> kontroll = new ArrayList();
-    public looPuzzle(int juppe) {
+    public looPuzzle() {
         Scene x3 = new Scene(ruudustik, 600, 600);
-        //Stage puzzleAla = new Stage();
         Puzzle.getStage().setScene(x3);
         Puzzle.getStage().show();
         Puzzle.getStage().setTitle("Puzzle");
+
+    }
+    public void genereeriPuzzle(int juppe){
         //Aja algus
         startTime = System.currentTimeMillis();
-        //Random pildi valimine
-        int rngPilt = (int)(Math.random()* lvl1Pildid)+1;
-
         //Pildi lõikamine ja lisamine ArrayListi
         int IDlugeja = 1;
         Double kordaja=0.0;
@@ -43,7 +47,7 @@ public class looPuzzle {
         }
         for (int i = 0; i < Math.sqrt(juppe); i++) {
             for (int j = 0; j < Math.sqrt(juppe) ; j++) {
-                Image origPilt = new Image("images/" + rngPilt + ".png");
+                Image origPilt = new Image("images/" + nimiPilt, 600, 600, false, false);
                 taisPilt = origPilt;
                 ImageView imv = new ImageView();
                 PixelReader piltSisse = origPilt.getPixelReader();

@@ -33,7 +33,7 @@ public class algus {
         algusala.getChildren().addAll(start, raskusastmed, lihtne, keskmine, raske);
         start.setOnAction(event -> {
                     juppe = (int) (g.getSelectedToggle().getUserData());
-                    new looPuzzle(juppe);
+                    new looPuzzle().genereeriPuzzle(juppe);
                     alustame.close();
                 }
         );
