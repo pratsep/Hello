@@ -72,6 +72,5 @@ public class klikk1 {
                 });
             }
         });
-        System.out.println(looPuzzle.ruudustik.getChildren());
     }
 }

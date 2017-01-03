@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class looPuzzle {
 
     public static Image taisPilt;
-    public  static double keeratud;
+    public static double keeratud;
     public static GridPane ruudustik = new GridPane();
     public static long startTime;
 
@@ -81,8 +81,6 @@ public class looPuzzle {
                 z = z+1;
             }
         }
-        System.out.println(ruudustik.getChildren());
-        System.out.println(ruudustik.getChildren().get(2));
         new klikk1();
     }
 }

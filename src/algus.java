@@ -24,7 +24,7 @@ public class algus {
         RadioButton keskmine = new RadioButton("(3x3)");
         keskmine.setUserData(9);
         keskmine.setToggleGroup(g);
-        RadioButton raske = new RadioButton("(4x4");
+        RadioButton raske = new RadioButton("(4x4)");
         raske.setUserData(16);
         raske.setToggleGroup(g);
         lihtne.setSelected(true);
