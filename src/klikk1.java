@@ -3,56 +3,56 @@ import javafx.scene.input.MouseButton;
 
 public class klikk1 {
     public klikk1() {
+        //Tekitame hiirekliki eventi mängualal
         looPuzzle.ruudustik.setOnMouseClicked(event -> {
-            ImageView pilt = (ImageView)(event.getTarget());
-            looPuzzle.keeratud = pilt.getRotate();
-            if(looPuzzle.keeratud == 360){
+            ImageView pilt = (ImageView)(event.getTarget());        //Küsime millisele jupile on klikitud
+            looPuzzle.keeratud = pilt.getRotate();                  //Küsime mitu kraadi klikitud juppi on pööratud
+            if(looPuzzle.keeratud == 360){                          //Määrame ära, et 360 kraadi on sama mis 0 kraadi
                 looPuzzle.keeratud = 0;
             }
+            //Määrame ära mis juhtub hiire parempoolse kliki korral
             if ( event.getButton().equals(MouseButton.SECONDARY)){
-                //ID1 = pilt.getId();
-                pilt.setRotate(looPuzzle.keeratud + 90);
+                pilt.setRotate(looPuzzle.keeratud + 90);            //Pöörab klikitud juppi 90 kraadi võrra
                 looPuzzle.keeratud = pilt.getRotate();
-                if(looPuzzle.keeratud == 360){
-                    looPuzzle.keeratud = 0;
+                if(looPuzzle.keeratud == 360){                      //Määrame taaskord ära, et 360 on sama mis 0 kraadi
+                    looPuzzle.keeratud = 0;                         //mis on vajalik hilisemas kontrollis
                     pilt.setRotate(looPuzzle.keeratud);
                 }
-                //System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
-                new kontrollimine();
+                new kontrollimine();                                //Käivitame kontrolli, kas puzzle on koos
             }
+            //Määrame ära mis juhtub hiire vasakpoolse kliki korral
             else if(event.getButton().equals(MouseButton.PRIMARY)){
-                //ID1 = pilt.getId();
-                int X1 = looPuzzle.ruudustik.getColumnIndex(pilt);
+                int X1 = looPuzzle.ruudustik.getColumnIndex(pilt);  //Küsime klikitud pildi veeru ja rea numbreid
                 int Y1 = looPuzzle.ruudustik.getRowIndex(pilt);
-                //System.out.println("Pildi asukoht on(x/y): " + X1 + "/" + Y1);
-                //System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
-                pilt.setOpacity(0.5);
+                pilt.setOpacity(0.5);                               //Teeme klikitud pildi poolenisti läbipaistvaks
+                //Määrame ära mis juhtub kui üks klikk on  aktiivne ja klikitakse teist korda
                 looPuzzle.ruudustik.setOnMouseClicked(event1 -> {
                     if(event1.getButton().equals(MouseButton.PRIMARY)){
                         ImageView pilt2 = (ImageView)(event1.getTarget());
-                        //ID2 = pilt2.getId();
-                        int X2 = looPuzzle.ruudustik.getColumnIndex(pilt2);
+                        int X2 = looPuzzle.ruudustik.getColumnIndex(pilt2); //Küsime teisena klikitud pildi rea ja veeru
                         int Y2 = looPuzzle.ruudustik.getRowIndex(pilt2);
-                        if(pilt2.getOpacity() != 1){
-                            pilt2.setOpacity(1);
-                            new klikk1();
+                        if(pilt2.getOpacity() != 1){                        //Kontrollime kas klikiti uuesti sama pilti
+                            pilt2.setOpacity(1);                            //või uut pilti, kui sama siis muudame
+                            new klikk1();                                   //pildi mitteaktiivseks ja alustame uuesti
                         }
+                        //Kui klikiti uut pilti, siis vahetame nii kontrolliks loodud arraylistis kui ka GridPane'l
+                        //piltide asukohad vastavalt varem saadud ridade ja veergude numbritele
                         else{
-                            //System.out.println("Teise pildi ID on: " + ID2);
-                            //System.out.println("Teise pildi asukoht on(x/y): " + X2 + "/" + Y2);
-                            int asukoht1 = looPuzzle.kontroll.indexOf(pilt);
+                            int asukoht1 = looPuzzle.kontroll.indexOf(pilt);//Küsime kontrolllistis piltide asukohti
                             int asukoht2 = looPuzzle.kontroll.indexOf(pilt2);
-                            looPuzzle.kontroll.set(asukoht2, pilt);
+                            looPuzzle.kontroll.set(asukoht2, pilt);         //Vahetame kontrolllistis piltide asukohad
                             looPuzzle.kontroll.set(asukoht1, pilt2);
-                            looPuzzle.ruudustik.getChildren().remove(pilt);
+                            looPuzzle.ruudustik.getChildren().remove(pilt); //Vahetame GridPane'l piltide asukohad
                             looPuzzle.ruudustik.getChildren().remove(pilt2);
                             looPuzzle.ruudustik.add(pilt2, X1, Y1);
                             looPuzzle.ruudustik.add(pilt, X2, Y2);
-                            pilt.setOpacity(1);
-                            new kontrollimine();
-                            new klikk1();
+                            pilt.setOpacity(1);                             //Muudab pildi "mitteaktiivseks" ehk läbipaistmatuks
+                            new kontrollimine();                            //Kontrollime kas puzzle on koos
+                            new klikk1();                                   //Kui pole koos siis ootame uut klikki
                         }
                     }
+                    //Kui esimene klikk on tehtud siis määrame ära mis juhtub kui pilt on tehtud aktiivseks aga vajutatakse
+                    //parempoolset ehk pööramiseks mõeldud hiire nuppu
                     else if ( event1.getButton().equals(MouseButton.SECONDARY)){
                         if(!(event1.getTarget().equals(pilt))){
                             pilt.setOpacity(1);
@@ -65,7 +65,6 @@ public class klikk1 {
                                 looPuzzle.keeratud = 0;
                                 pilt.setRotate(looPuzzle.keeratud);
                             }
-                            //System.out.println("Pilti on keeratud " + keeratud + " kraadi võrra.");
                             new kontrollimine();
                         }
                     }
