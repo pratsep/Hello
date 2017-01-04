@@ -1,13 +1,11 @@
-# Puzzle
+﻿# Puzzle
 
-Puzzle lahendamise mäng
+Projektiks on mäng - täpsemalt puzzle. Valikus on kolm raskusastet mida lahendatakse aja peale. Programm valib kaustast suvaliselt pildi mis lõigatakse juppideks ja mida kasutaja hakkab kokku panema.
 
-  Mängu esimeseks etapiks oleks üheksaks jupiks jagatud pilt, mille jupid on kasutaja jaoks segamini paisatud, 
-samal ajal ka näiteks 90 või 180 kraadi pööratud. Kasutaja eesmärgiks oleks pildi jupid pöörata õigesse asendisse ja 
-siis piltide asukohti vahetades leida igale jupile oma koht kuni saab kokku tervikliku pildi.
-  Mäng võiks käia näiteks ajalimiidi peale, saades lahenduse enne kui ajalimiit täis tiksub, avaneb järgmine, juba rohkemate 
-juppidega puzzle. Kuna javas pole kunagi varem programmeerinud siis kõigepealt prooviks esimese puzzlega hakkama saada. 
-Kui juba mõningad asjad käppa saab siis võiks asja siduda ka andmebaasiga kuhu saab salvestada erinevate kasutajate lahenduse 
-kiiruseid või punkte vms. Mingi hetk võiks ka näiteks peale mõne pildi lahendamist küsida kasutajalt, kas ta tahab oma tulemust
-salvestada, et ta saaks hiljem sealt kohast edasi mängida. Andmebaasid on muidugi täielik ulmekoht minu jaoks aga õppima siia tuldud
-sai nii et proovima peaks. Kindlasti saab veel igasugu vilesid juurde mõelda kui aega peaks üle jääma ja oskust juures.
+Kasutusjuhend: Kõigepealt tuleb kasutajal valida raskusaste.Raskustastmed tähendavad mitmeks jupiks on suvaliselt valitud pilt lõigatud. Kui raskusaste on valitud ja kasutaja alustab mängu, läheb käima aeg. Kasutaja jaoks on vastavalt raskusastmele lõigatud pilt juppideks ja jupid on suvaliselt ringi paigutatud, lisaks on jupid keeratud kas 0, 90, 180 või 270 kraadi.
+*Hiire vasaku nupuga jupi peale vajutades aktiveerub jupp, kui mõne teise jupi peale vajutada siis vahetavad jupid kohad. Uuesti sama jupi peale vajutades deaktiveerub jupp ja saab uue jupi valida mida liigutada.
+*Hiire parema nupuga saab kasutaja juppe 90 kraadi kaupa päripäeva keerata.
+Kui puzzle on kokku saadud siis tuleb ette menüü kus kasutaja saab sisestada oma nime(ilma tühikuteta) ja ta nimi koos ajaga lisatakse tulemuste tabelisse. Peale seda kuvatakse 10 parimat tulemust.
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
