@@ -2,23 +2,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 
 public class klikk1 {
+    private ImageView pilt;
     public klikk1() {
         //Tekitame hiirekliki eventi mängualal
         looPuzzle.ruudustik.setOnMouseClicked(event -> {
-            ImageView pilt = (ImageView)(event.getTarget());        //Küsime millisele jupile on klikitud
+            pilt = (ImageView)(event.getTarget());        //Küsime millisele jupile on klikitud
             looPuzzle.keeratud = pilt.getRotate();                  //Küsime mitu kraadi klikitud juppi on pööratud
             if(looPuzzle.keeratud == 360){                          //Määrame ära, et 360 kraadi on sama mis 0 kraadi
                 looPuzzle.keeratud = 0;
             }
             //Määrame ära mis juhtub hiire parempoolse kliki korral
             if ( event.getButton().equals(MouseButton.SECONDARY)){
-                pilt.setRotate(looPuzzle.keeratud + 90);            //Pöörab klikitud juppi 90 kraadi võrra
-                looPuzzle.keeratud = pilt.getRotate();
-                if(looPuzzle.keeratud == 360){                      //Määrame taaskord ära, et 360 on sama mis 0 kraadi
-                    looPuzzle.keeratud = 0;                         //mis on vajalik hilisemas kontrollis
-                    pilt.setRotate(looPuzzle.keeratud);
-                }
-                new kontrollimine();                                //Käivitame kontrolli, kas puzzle on koos
+                paremKlikk();
             }
             //Määrame ära mis juhtub hiire vasakpoolse kliki korral
             else if(event.getButton().equals(MouseButton.PRIMARY)){
@@ -59,17 +54,22 @@ public class klikk1 {
                             new klikk1();
                         }
                         else{
-                            pilt.setRotate(looPuzzle.keeratud + 90);
-                            looPuzzle.keeratud = pilt.getRotate();
-                            if(looPuzzle.keeratud == 360){
-                                looPuzzle.keeratud = 0;
-                                pilt.setRotate(looPuzzle.keeratud);
-                            }
-                            new kontrollimine();
+                            paremKlikk();
                         }
                     }
                 });
             }
         });
+    }
+
+    //Meetod millega määrame ära mis juhtub hiire parempoolse kliki korral
+    private void paremKlikk(){
+        pilt.setRotate(looPuzzle.keeratud + 90);                            //Pöörab klikitud juppi 90 kraadi võrra
+        looPuzzle.keeratud = pilt.getRotate();
+        if(looPuzzle.keeratud == 360){                                      //Määrame taaskord ära, et 360 on sama mis 0 kraadi
+            looPuzzle.keeratud = 0;                                         //mis on vajalik hilisemas kontrollis
+            pilt.setRotate(looPuzzle.keeratud);                             //Määrame 360 kraadi asemele 0 kraadi
+        }
+        new kontrollimine();                                                //Käivitame kontrolli, kas puzzle on koos
     }
 }
