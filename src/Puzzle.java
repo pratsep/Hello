@@ -7,7 +7,6 @@ public class Puzzle extends Application {
     public static Stage getStage() { return puzzleAla; }
     public static Stage getFinalStage() { return voitnud; }
     @Override
-
     public void start(Stage primaryStage) throws Exception {
         puzzleAla = new Stage();
         voitnud = new Stage();
