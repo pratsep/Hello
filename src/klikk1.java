@@ -1,3 +1,4 @@
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -9,6 +10,8 @@ public class klikk1 {
     double keeratud;
     private ImageView pilt;
     public klikk1(int juppe, Image taispilt, GridPane ruudustik, long startTime, ArrayList<ImageView> list, ArrayList<ImageView> kontroll, Stage puzzleAla) {
+        kusHiir(juppe, ruudustik);
+
         //Tekitame hiirekliki eventi mängualal
         ruudustik.setOnMouseClicked(event -> {
             pilt = (ImageView)(event.getTarget());        //Küsime millisele jupile on klikitud
@@ -76,5 +79,30 @@ public class klikk1 {
             pilt.setRotate(keeratud);                                     //Määrame 360 kraadi asemele 0 kraadi
         }
         new kontrollimine(juppe, taispilt, ruudustik, startTime, list, kontroll, puzzleAla);   //Käivitame kontrolli, kas puzzle on koos
+    }
+
+
+    //Meetod mis näitab muudab kasutajale jupi värvi kus ta hiir parajasti asub
+    private void kusHiir(int juppe, GridPane ruudustik){
+        SepiaTone sepiaTone = new SepiaTone();
+        sepiaTone.setLevel(0.7);
+        for (int j = 0; j < juppe; j++) {
+            ruudustik.getChildren().get(j).setOnMouseEntered(event -> {
+                ImageView mouseOverPilt = (ImageView)(event.getTarget());
+                System.out.println(mouseOverPilt);
+                for (int i = 0; i < juppe ; i++) {
+                    if (ruudustik.getChildren().get(i).equals(mouseOverPilt)){
+                        //ruudustik.getChildren().get(i).setScaleX(1.1);
+                        //ruudustik.getChildren().get(i).setScaleY(1.1);
+                        ruudustik.getChildren().get(i).setEffect(sepiaTone);
+                    }
+                    else {
+                        ruudustik.getChildren().get(i).setEffect(null);
+                        //ruudustik.getChildren().get(i).setScaleX(1);
+                        //ruudustik.getChildren().get(i).setScaleY(1);
+                    }
+                }
+            });
+        }
     }
 }

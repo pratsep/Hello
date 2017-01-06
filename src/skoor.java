@@ -2,7 +2,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -63,8 +63,8 @@ public class skoor {
 
     private void looSkooritabel(){
         //Loob skooritabeli
-        VBox skooriTabel = new VBox();
-        highScore = new Scene(skooriTabel, 500, 500);
+        GridPane skoorTabel = new GridPane();
+        highScore = new Scene(skoorTabel, 500, 500);
         try {
             BufferedReader andmed = new BufferedReader(new FileReader(f));
             kasutajaAndmed = andmed.readLine();
@@ -102,11 +102,13 @@ public class skoor {
                     i = -1;
                 }
             }
-            //Tsükkel andmete lisamiseks VBoxi
+            //Tsükkel andmete lisamiseks GridPanele
             int z=1;
             for (int i = 0; i < andmebaasist.size() && i < 20; i=i+2) {
-                Label rida1 = new Label(z+".\t" + andmebaasist.get(i) + "   " + andmebaasist.get(i+1) );
-                skooriTabel.getChildren().add(rida1);
+                Label rida1 = new Label(z+".\t" + andmebaasist.get(i) + "   ");
+                Label rida2 = new Label(andmebaasist.get(i+1));
+                skoorTabel.add(rida1, 1, z);
+                skoorTabel.add(rida2, 2, z);
                 z=z+1;
             }
             andmed.close();
