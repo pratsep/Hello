@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,10 +19,10 @@ public class kontrollimine {
     TextField looKasutaja = new TextField("Lisa oma nimi");
     private StackPane lopuPilt = new StackPane();
     private Scene loppStseen = new Scene(lopuPilt);
-
+    Stage voitnud;
 
     //Konstruktor mis kontrollib, kas puzzle on koos
-    public kontrollimine(int juppe, Image taisPilt, GridPane ruudustik, long startTime, ArrayList<ImageView> list, ArrayList<ImageView> kontroll) {
+    public kontrollimine(int juppe, Image taisPilt, GridPane ruudustik, long startTime, ArrayList<ImageView> list, ArrayList<ImageView> kontroll, Stage puzzleAla) {
         int asend = 0;
         //Kontrollime kas GridPanel on mõni jupp veel pööramata
         for (int i = 0; i < juppe; i++) {
@@ -37,18 +39,18 @@ public class kontrollimine {
                 }
             }
             //Loome uue stseeni lõpptulemuse kuvamiseks
+            voitnud = new Stage();
             VBox ala = new VBox();
             Scene lopuStseen = new Scene(ala, 200, 200);
-            Puzzle.getFinalStage().setScene(lopuStseen);
-            Puzzle.getFinalStage().show();
-            Puzzle.getFinalStage().setX(300);
-            Puzzle.getFinalStage().setTitle("Mäng läbi");
+            voitnud.setScene(lopuStseen);
+            voitnud.show();
+            voitnud.setX(300);
+            voitnud.setTitle("Mäng läbi");
             //Aja võtmine
             duration = new SimpleDateFormat("mm:ss").format(new Date(System.currentTimeMillis() - startTime));
             Label lopp = new Label("Puzzle on koos!");
             Label lopuaeg = new Label(duration);
             ala.getChildren().addAll(lopp, lopuaeg, looKasutaja, looUus);
-            new skoor(juppe, looKasutaja, looUus, duration);            //Käivitame skoori leidmise
 
             //Lisame puzzle lahendamise korral puzzle pildi peale "win" pildi
             Image win = new Image("win/win.png");
@@ -57,11 +59,12 @@ public class kontrollimine {
             ImageView tehtud = new ImageView();
             tehtud.setImage(taisPilt);
             lopuPilt.getChildren().addAll(tehtud, winIm);
-            Puzzle.getStage().setScene(loppStseen);
-            Puzzle.getFinalStage().setOnCloseRequest(event -> {         //Uue stage'i sulgemise korral suletakse
-                Puzzle.getStage().close();                              //ka puzzle stage
+            puzzleAla.setScene(loppStseen);
+            voitnud.setOnCloseRequest(event -> {         //Uue stage'i sulgemise korral suletakse ka puzzle stage
+                puzzleAla.close();
             });
 
+            new skoor(juppe, looKasutaja, looUus, duration, puzzleAla, voitnud);            //Käivitame skoori leidmise
         }
     }
 }

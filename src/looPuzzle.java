@@ -4,12 +4,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class looPuzzle {
     Image taisPilt;
-    public static double keeratud;
     GridPane ruudustik = new GridPane();
     long startTime;
     Double kordaja=0.0;
@@ -17,8 +18,7 @@ public class looPuzzle {
     ArrayList<ImageView> list = new ArrayList();
     ArrayList<ImageView> kontroll = new ArrayList();
     ArrayList<Integer> sassis = new ArrayList<>();
-
-
+    Stage puzzleAla;
 
     //Kaustast random pildi valimine
     int pikkusPildid = new File("src/images").listFiles().length;   //Leiab kaustas olevate piltide arvu
@@ -27,12 +27,13 @@ public class looPuzzle {
     int randomNr = (int)(Math.random()*pikkusPildid);               //Loome vastavalt piltide arvule suvalise arvu
     String nimiPilt = listPildid[randomNr].getName();               //Otsime listist vastavalt genereeritud numbrile pildi nime
 
-    //Konstruktor mis ehitab uue stseeni
+    //Konstruktor mis ehitab "lava"
     public looPuzzle() {
+        puzzleAla = new Stage();
         Scene x3 = new Scene(ruudustik, 600, 600);
-        Puzzle.getStage().setScene(x3);
-        Puzzle.getStage().show();
-        Puzzle.getStage().setTitle("Puzzle");
+        puzzleAla.setScene(x3);
+        puzzleAla.show();
+        puzzleAla.setTitle("Puzzle");
     }
 
     //Objekt mis genereerib pildist puzzle vastavalt juppide arvule
@@ -52,7 +53,7 @@ public class looPuzzle {
         loikaPiltJuppideks(juppe);
         looRandomArrayList(juppe);
         looPiltidegaGridPane(juppe);
-        new klikk1(juppe, taisPilt, ruudustik, startTime, list, kontroll);  //Käivitame konstruktori klikk1
+        new klikk1(juppe, taisPilt, ruudustik, startTime, list, kontroll, puzzleAla);  //Käivitame konstruktori klikk1
     }
 
 
