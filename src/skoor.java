@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class skoor {
+    public GridPane skoorTabel;
     private String kasutajaAndmed;
     private File f;
     private ArrayList<String> andmebaasist = new ArrayList<>();
@@ -28,7 +29,15 @@ public class skoor {
             looKasutaja.clear();
         });
         looUus.setOnAction(event1 -> {
-            sisestuseKontroll(looKasutaja);
+            // Erinevad kontrollid, et poleks tühikut, väli poleks tühi
+            if (looKasutaja.getText().contains(" ")){
+                looKasutaja.setText("Tühikut ei tohi olla");
+                return;
+            }
+            else if (looKasutaja.getText().equals("")){
+                looKasutaja.setText("Tühja välja ei tohi jätta");
+                return;
+            }
             //Kui eelnevad kontrollid on läbitud, siis kirjutatakse faili kasutaja nimi ja aeg
             if (!(looKasutaja.getText().equals(""))) {
                 try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f, true)))) {
@@ -41,29 +50,16 @@ public class skoor {
                 voitnud.setScene(highScore);
                 voitnud.setTitle("High Score!");
                 puzzleAla.close();
+                new mangimeVeel(skoorTabel, voitnud);
             }
         });
     }
 
 
 
-    private void sisestuseKontroll(TextField looKasutaja){
-        //Erinevad kontrollid, et poleks tühikut, väli poleks tühi
-        if (looKasutaja.getText().contains(" ")){
-            looKasutaja.setText("Tühikut ei tohi olla");
-            return;
-        }
-        if (looKasutaja.getText().equals("")){
-            looKasutaja.setText("Tühja välja ei tohi jätta");
-            return;
-        }
-    }
-
-
-
     private void looSkooritabel(){
         //Loob skooritabeli
-        GridPane skoorTabel = new GridPane();
+        skoorTabel = new GridPane();
         highScore = new Scene(skoorTabel, 500, 500);
         try {
             BufferedReader andmed = new BufferedReader(new FileReader(f));

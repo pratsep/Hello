@@ -89,17 +89,12 @@ public class klikk1 {
         for (int j = 0; j < juppe; j++) {
             ruudustik.getChildren().get(j).setOnMouseEntered(event -> {
                 ImageView mouseOverPilt = (ImageView)(event.getTarget());
-                System.out.println(mouseOverPilt);
                 for (int i = 0; i < juppe ; i++) {
                     if (ruudustik.getChildren().get(i).equals(mouseOverPilt)){
-                        //ruudustik.getChildren().get(i).setScaleX(1.1);
-                        //ruudustik.getChildren().get(i).setScaleY(1.1);
                         ruudustik.getChildren().get(i).setEffect(sepiaTone);
                     }
                     else {
                         ruudustik.getChildren().get(i).setEffect(null);
-                        //ruudustik.getChildren().get(i).setScaleX(1);
-                        //ruudustik.getChildren().get(i).setScaleY(1);
                     }
                 }
             });
