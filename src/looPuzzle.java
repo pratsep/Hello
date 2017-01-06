@@ -8,13 +8,17 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class looPuzzle {
-
     Image taisPilt;
     public static double keeratud;
     GridPane ruudustik = new GridPane();
     long startTime;
+    Double kordaja=0.0;
+    int IDlugeja = 1;
     ArrayList<ImageView> list = new ArrayList();
     ArrayList<ImageView> kontroll = new ArrayList();
+    ArrayList<Integer> sassis = new ArrayList<>();
+
+
 
     //Kaustast random pildi valimine
     int pikkusPildid = new File("src/images").listFiles().length;   //Leiab kaustas olevate piltide arvu
@@ -29,7 +33,6 @@ public class looPuzzle {
         Puzzle.getStage().setScene(x3);
         Puzzle.getStage().show();
         Puzzle.getStage().setTitle("Puzzle");
-
     }
 
     //Objekt mis genereerib pildist puzzle vastavalt juppide arvule
@@ -37,8 +40,6 @@ public class looPuzzle {
         //Aja algus
         startTime = System.currentTimeMillis();
         //Tekitame vastavalt juppide arvule kordajad, mille järgi pildist jupid lõigatakse
-        int IDlugeja = 1;
-        Double kordaja=0.0;
         if (juppe == 4){
             kordaja = 1.5;
         }
@@ -48,7 +49,48 @@ public class looPuzzle {
         else if (juppe == 16){
             kordaja = 0.75;
         }
+        loikaPiltJuppideks(juppe);
+        looRandomArrayList(juppe);
+        looPiltidegaGridPane(juppe);
+        new klikk1(juppe, taisPilt, ruudustik, startTime, list, kontroll);  //Käivitame konstruktori klikk1
+    }
 
+
+
+    private void looRandomArrayList(int juppe){
+        //Genereerime arraylisti vastavalt juppide arvule ja siis ajame selle segamini
+        ArrayList<Integer> random = new ArrayList<>();
+        for (int i = 0; i < juppe; i++) {
+            random.add(i);
+        }
+        while (random.size() != 0) {
+            int rng1 = (int) (Math.random()*random.size());
+            int rng =(int) (Math.random()*sassis.size());
+            sassis.add(rng, random.get(rng1));
+            random.remove(rng1);
+        }
+    }
+
+
+
+    private void looPiltidegaGridPane(int juppe){
+        //Lisame sassi aetud array listi järgi jupid GridPane'le
+        int z = 0;
+        for (int j = 0; j < Math.sqrt(juppe); j++) {
+            for (int k = 0; k < Math.sqrt(juppe) ; k++) {
+                ImageView pilt = list.get(sassis.get(z));
+                ruudustik.add(pilt, k, j);
+                kontroll.add(z, pilt);                          //Kontroll on arraylist mille järgi lõpus puzzle valmis saamist kontrollida
+                double kraad = ((int)(Math.random()*4))*90;     //Loome kas 0, 90, 180 või 270 random arvu
+                pilt.setRotate(kraad);                          //Kraadi järgi pöörame igat puzzle juppi
+                z = z+1;
+            }
+        }
+    }
+
+
+
+    private void loikaPiltJuppideks(int juppe){
         //Lõikame kaustast valitud pildi raskusastme järgi valitud juppide arvule vastava kordaja järgi
         for (int i = 0; i < Math.sqrt(juppe); i++) {
             for (int j = 0; j < Math.sqrt(juppe) ; j++) {
@@ -63,32 +105,5 @@ public class looPuzzle {
                 IDlugeja = IDlugeja + 1;
             }
         }
-
-        //Genereerime arraylisti vastavalt juppide arvule ja siis ajame selle segamini
-        ArrayList<Integer> random = new ArrayList<>();
-        for (int i = 0; i < juppe; i++) {
-            random.add(i);
-        }
-        ArrayList<Integer> sassis = new ArrayList<>();
-        while (random.size() != 0) {
-            int rng1 = (int) (Math.random()*random.size());
-            int rng =(int) (Math.random()*sassis.size());
-            sassis.add(rng, random.get(rng1));
-            random.remove(rng1);
-        }
-
-        //Lisame sassi aetud array listi järgi jupid GridPane'le
-        int z = 0;
-        for (int j = 0; j < Math.sqrt(juppe); j++) {
-            for (int k = 0; k < Math.sqrt(juppe) ; k++) {
-                ImageView pilt = list.get(sassis.get(z));
-                ruudustik.add(pilt, k, j);
-                kontroll.add(z, pilt);                          //Kontroll on arraylist mille järgi lõpus puzzle valmis saamist kontrollida
-                double kraad = ((int)(Math.random()*4))*90;     //Loome kas 0, 90, 180 või 270 random arvu
-                pilt.setRotate(kraad);                          //Kraadi järgi pöörame igat puzzle juppi
-                z = z+1;
-            }
-        }
-        new klikk1(juppe, taisPilt, ruudustik, startTime, list, kontroll);  //Käivitame konstruktori klikk1
     }
 }

@@ -17,6 +17,8 @@ public class kontrollimine {
     TextField looKasutaja = new TextField("Lisa oma nimi");
     private StackPane lopuPilt = new StackPane();
     private Scene loppStseen = new Scene(lopuPilt);
+
+
     //Konstruktor mis kontrollib, kas puzzle on koos
     public kontrollimine(int juppe, Image taisPilt, GridPane ruudustik, long startTime, ArrayList<ImageView> list, ArrayList<ImageView> kontroll) {
         int asend = 0;
