@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class algus {
-    public static int juppe;
+    int juppe;
     public algus() {
         Stage alustame = new Stage();
         VBox algusala = new VBox();

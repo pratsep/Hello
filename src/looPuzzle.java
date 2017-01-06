@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class looPuzzle {
 
-    public static Image taisPilt;
+    Image taisPilt;
     public static double keeratud;
-    public static GridPane ruudustik = new GridPane();
-    public static long startTime;
-    public static ArrayList<ImageView> list = new ArrayList();
-    public static ArrayList<ImageView> kontroll = new ArrayList();
+    GridPane ruudustik = new GridPane();
+    long startTime;
+    ArrayList<ImageView> list = new ArrayList();
+    ArrayList<ImageView> kontroll = new ArrayList();
 
     //Kaustast random pildi valimine
     int pikkusPildid = new File("src/images").listFiles().length;   //Leiab kaustas olevate piltide arvu
@@ -89,6 +89,6 @@ public class looPuzzle {
                 z = z+1;
             }
         }
-        new klikk1();                                           //Käivitame konstruktori klikk1
+        new klikk1(juppe, taisPilt, ruudustik, startTime, list, kontroll);  //Käivitame konstruktori klikk1
     }
 }

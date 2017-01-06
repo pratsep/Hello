@@ -1,16 +1,18 @@
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import java.io.*;
 import java.util.ArrayList;
 
 public class skoor {
-    String kasutajaAndmed;
-    File f;
-    ArrayList<String> andmebaasist = new ArrayList<>();
+    private String kasutajaAndmed;
+    private File f;
+    private ArrayList<String> andmebaasist = new ArrayList<>();
 
     //Konstruktor skoori kirja panemiseks, skooritabeli loomiseks ja aegade järgi järjestamiseks
-    public skoor(int tekstiFailist) {                                       //Juppide järgi valitakse millisesse
+    public skoor(int tekstiFailist, TextField looKasutaja, Button looUus, String duration) {                                       //Juppide järgi valitakse millisesse
         f = new File("src/score/" + tekstiFailist + ".txt");                //faili skoor kirja läheb
         //Kontrollime kas fail on olemas, kui pole, siis loome uue tekstifaili
         if (!(f.exists())) {
@@ -21,23 +23,23 @@ public class skoor {
             }
         }
         //Kasutaja vajutab tekstiväljale, siis tektsiväli tühjendatakse
-        kontrollimine.looKasutaja.setOnMouseClicked(event -> {
-            kontrollimine.looKasutaja.clear();
+        looKasutaja.setOnMouseClicked(event -> {
+            looKasutaja.clear();
         });
         //Erinevad kontrollid, et poleks tühikut, väli poleks tühi
-        kontrollimine.looUus.setOnAction(event1 -> {
-            if (kontrollimine.looKasutaja.getText().contains(" ")){
-                kontrollimine.looKasutaja.setText("Tühikut ei tohi olla");
+        looUus.setOnAction(event1 -> {
+            if (looKasutaja.getText().contains(" ")){
+                looKasutaja.setText("Tühikut ei tohi olla");
                 return;
             }
-            if (kontrollimine.looKasutaja.getText().equals("")){
-                kontrollimine.looKasutaja.setText("Tühja välja ei tohi jätta");
+            if (looKasutaja.getText().equals("")){
+                looKasutaja.setText("Tühja välja ei tohi jätta");
                 return;
             }
             //Kui eelnevad kontrollid on läbitud, siis kirjutatakse faili kasutaja nimi ja aeg
-            if (!(kontrollimine.looKasutaja.getText().equals(""))) {
+            if (!(looKasutaja.getText().equals(""))) {
                 try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f, true)))) {
-                    out.println(kontrollimine.looKasutaja.getText() + " " + kontrollimine.duration);
+                    out.println(looKasutaja.getText() + " " + duration);
                     out.close();
                 } catch (IOException e) {
                     System.err.println(e);
