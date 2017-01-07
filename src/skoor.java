@@ -31,11 +31,14 @@ public class skoor {
         looUus.setOnAction(event1 -> {
             // Erinevad kontrollid, et poleks tühikut, väli poleks tühi
             if (looKasutaja.getText().contains(" ")){
-                looKasutaja.setText("Tühikut ei tohi olla");
+                //looKasutaja.setText("Tühikut ei tohi olla");
+                new errorPopUp().kuvaPopUp("Tühikut ei tohi olla!");
+                looKasutaja.clear();
                 return;
             }
             else if (looKasutaja.getText().equals("")){
-                looKasutaja.setText("Tühja välja ei tohi jätta");
+                //looKasutaja.setText("Tühja välja ei tohi jätta");
+                new errorPopUp().kuvaPopUp("Tühja välja ei tohi jätta");
                 return;
             }
             //Kui eelnevad kontrollid on läbitud, siis kirjutatakse faili kasutaja nimi ja aeg

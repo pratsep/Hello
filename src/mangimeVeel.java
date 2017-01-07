@@ -21,8 +21,6 @@ public class mangimeVeel {
         });
     }
     private void rohkemEiTee(Button eiUuesti){
-        eiUuesti.setOnAction(event -> {
-            System.exit(0);
-        });
+        eiUuesti.setOnAction(event -> System.exit(0));
     }
 }
